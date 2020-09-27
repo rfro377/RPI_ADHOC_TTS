@@ -9,10 +9,12 @@ class TCPPC {
     BufferedReader inFromServer;
     private DataInputStream dis;
 
+    TCPPC(){ inFromUser = new BufferedReader(new InputStreamReader(System.in));};
+
     public String makeConnection(String ip, String port) throws UnknownHostException, IOException {
         String response = "-";
         clientSocket = new Socket(ip, Integer.valueOf(port));
-        inFromUser = new BufferedReader(new InputStreamReader(System.in));
+       
         outToServer = new DataOutputStream(clientSocket.getOutputStream());
 
         inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -51,7 +53,12 @@ class TCPPC {
 
    }
 
-    public void main(String args[]) {
+    public static void main(String args[]) {
+        TCPPC iTcppc = new TCPPC();
+        iTcppc.run();
+    }
+
+    public void run(){
         String userInpuString = null;
         String[] commandarray;
         try {
